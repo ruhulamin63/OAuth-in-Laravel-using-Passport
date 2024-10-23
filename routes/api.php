@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,11 @@ Route::post('/login', function (Request $request) {
     }
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// OAuth client routes
+Route::get('/oauth/clients', [ClientController::class, 'index']);  // List all clients
+Route::post('/oauth/clients', [ClientController::class, 'store']);  // Create a new client
+
+Route::prefix('v1')->middleware('auth:api')->group(function () {
+    include_once('oauth/v1/access-routes.php');
 });
 

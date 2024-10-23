@@ -30,6 +30,14 @@ composer update
 ```bash
 composer require laravel/passport
 php artisan passport:install
+
+or
+
+php artisan passport:client --password
+
+or
+
+php artisan passport:client --personal
 ```
 
 ```bash
@@ -39,6 +47,31 @@ php artisan migrate
 ### Public Access Route
 ```bash
 http://127.0.0.1:8000
+```
+
+### API Access Route
+```bash
+php artisan install:api
+```
+
+#### To list all OAuth clients
+```bash
+GET http://auth-service.local/api/oauth/clients
+```
+
+#### To create a new OAuth client
+```bash
+POST http://auth-service.local/api/oauth/clients
+```
+
+#### To list all tokens for an authenticated user
+```bash
+GET http://auth-service.local/api/oauth/tokens
+```
+
+#### To revoke a token
+```bash
+DELETE http://auth-service.local/api/oauth/tokens/{tokenId}
 ```
 
 ### Step 1: Generating private and public keys
